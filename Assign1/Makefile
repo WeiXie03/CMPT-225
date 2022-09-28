@@ -16,6 +16,9 @@ Stest: Stest.o  # test program for Stack class
 #Qtest: Qtest.o  # test program for Queue class
 #	g++ -Wall -o Qtest Qtest.o  
 
+Darraytest: Darraytest.o # test program for Deque class overloaded [] operator
+	g++ -Wall -o Darraytest Darraytest.o  
+
 Dtest: Dtest.o  # test program for Deque class
 	g++ -Wall -o Dtest Dtest.o  
 
@@ -39,6 +42,8 @@ Stest.o: Stest.cpp Stack.h dsexceptions.h
 Dtest.o: Dtest.cpp Deque.h dsexceptions.h
 	g++ -Wall -o Dtest.o -c Dtest.cpp
 
+Darraytest.o: Darraytest.cpp Deque.h dsexceptions.h # test program for Deque class overloaded [] operator
+	g++ -Wall -o Darraytest.o -c Darraytest.cpp
 
 clean:
 	rm -f Vtest Itest Ttest Stest Qtest Dtest *.o

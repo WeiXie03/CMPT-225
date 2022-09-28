@@ -55,11 +55,27 @@ void test_jump() {
         cout << "\tnow "; dq.ddisplay(); cout << '\n';
     }
 }
+void test_eject() {
+    Deque<int> dq;
+    int eles[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    for (int i : eles) {
+        dq.enqueue(i);
+    }
+    dq.display();
+    cout << "under the hood: "; dq.ddisplay();
+    cout << '\n';
+    for (int i=10; i >= 0; --i) {
+        cout << "\tejecting " << dq.eject() <<'\n';
+        cout << "\tnow "; dq.display(); cout << '\n';
+    }
+    cout << "under the hood: "; dq.ddisplay();
+}
 
 int main() {
-    //test_enqueue_int();
+    //test_enqueue_char();
     //test_dequeue_int();
     //test_clear();
-    test_jump();
+    //test_jump();
+    //test_eject();
     return 0;
 }

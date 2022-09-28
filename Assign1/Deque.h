@@ -22,6 +22,8 @@ class Deque
 
     bool empty() const  { return size() == 0; }
     int size() const { return theSize; }
+    Object& operator[] (int index);
+
     void clear(){
         // remove all contents and reset the capacity to it's initial value 
         // TODO: can I just destruct and re-refer `this` to a new one?
@@ -70,7 +72,7 @@ class Deque
 
         //cout << "New back ind = " << back <<'\n';
 
-        theSize++ ;
+        ++theSize;
     }
 
     void jump( const Object & x )// Insert a new object at the front 
@@ -91,7 +93,7 @@ class Deque
 
     Object dequeue( )// Remove and return the object at the front 
     {
-        theSize--;
+        --theSize;
         Object temp = objects[front];
         front = (front+1) % theCapacity ;
         return temp ;
@@ -99,7 +101,12 @@ class Deque
 
     Object eject( )// Remove and return the object at the back 
     {
-        // Implement this 
+        if (empty()) {
+            cout << "Error[eject()]: already empty";
+            return -1;
+        };
+        --theSize;
+        return objects[back];
     }
 
     // TODO: base off theSize
@@ -112,7 +119,7 @@ class Deque
         int i;
         for (int cur=0; cur < theSize; ++cur) {
             i = (front + cur) % theCapacity;
-            cout << cur << "=" << objects[i] << ", " ;
+            cout << objects[i] << ", " ;
         }
         cout << " >" << endl;
     }
@@ -133,7 +140,6 @@ class Deque
         cout << " ]" << endl;
     }
 
-
   private:
     int theSize;
     int front;
@@ -141,5 +147,20 @@ class Deque
     int theCapacity;
     Object * objects;
 };
+
+template<typename Object>
+inline Object& Deque<Object>::operator[] (int index) {
+    if (index < 0 || index >= theSize)
+        throw ("Deque::operator[]: index out of bounds.\n");
+    else {
+        int arr_i = (front + index) % theCapacity;
+        return objects[arr_i];
+    }
+}
+
+/*
+    int& operator[] (int index) {
+    }
+*/
 
 #endif
