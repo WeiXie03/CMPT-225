@@ -8,7 +8,7 @@ void test_enqueue_char() {
     for (char c : eles) {
         dq.enqueue(c);
     }
-    dq.display();
+    dq.ddisplay();
 }
 void test_enqueue_int() {
     Deque<int> dq;
@@ -16,7 +16,7 @@ void test_enqueue_int() {
     for (int i : eles) {
         dq.enqueue(i);
     }
-    dq.display();
+    dq.ddisplay();
 }
 void test_dequeue_int() {
     Deque<int> dq;
@@ -24,7 +24,7 @@ void test_dequeue_int() {
     for (int i : eles) {
         dq.enqueue(i);
     }
-    dq.display();
+    dq.ddisplay();
     cout << "==beginning dequeuing==\n";
     for (int i : eles) {
         cout << "\tdequeued " << dq.dequeue() <<'\n';
@@ -37,15 +37,29 @@ void test_clear() {
     for (int i : eles) {
         dq.enqueue(i);
     }
-    dq.display();
+    dq.ddisplay();
     cout << "==clearing now==\n";
     dq.clear();
     dq.ddisplay();
+}
+void test_jump() {
+    Deque<int> dq;
+    int eles[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    for (int i=0; i < 7; ++i)
+        dq.enqueue(eles[i]);
+    cout << "Enqueued some ints, now "; dq.ddisplay();
+    cout << "\nNow begin jumping\n";
+    for (int i=7; i < 10; ++i) {
+        cout << "\tjumping " << eles[i] <<'\n';
+        dq.jump(eles[i]);
+        cout << "\tnow "; dq.ddisplay(); cout << '\n';
+    }
 }
 
 int main() {
     //test_enqueue_int();
     //test_dequeue_int();
-    test_clear();
+    //test_clear();
+    test_jump();
     return 0;
 }

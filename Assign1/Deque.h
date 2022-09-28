@@ -75,14 +75,18 @@ class Deque
 
     void jump( const Object & x )// Insert a new object at the front 
     {
-        // Implement this 
         // push everything back
-        /*
-        if ((theSize - front) > theCapacity) {
-            // case wraparound
+        if( theSize == theCapacity ) reserve( 2 * theCapacity + 1 );
+        // starting from back, "pull" each element one farther right/back
+        int i;
+        for (int cur = theSize; cur >= 0; --cur) {
+            i = (front + cur) % theCapacity;
+            // move back by 1
+            objects[ (i+1) % theCapacity ] = objects[i];
         }
-        */
-        // dude, just calc every ind := __+1 % cap
+        objects[front] = x;
+        ++theSize;
+        back = (front + theSize) % theCapacity;
     }
 
     Object dequeue( )// Remove and return the object at the front 
