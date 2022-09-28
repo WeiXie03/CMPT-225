@@ -12,14 +12,40 @@ void test_enqueue_char() {
 }
 void test_enqueue_int() {
     Deque<int> dq;
-    int eles[] = {0, 1, 2, 3, 4, 5, 6, 7};
+    int eles[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     for (int i : eles) {
         dq.enqueue(i);
     }
     dq.display();
 }
+void test_dequeue_int() {
+    Deque<int> dq;
+    int eles[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    for (int i : eles) {
+        dq.enqueue(i);
+    }
+    dq.display();
+    cout << "==beginning dequeuing==\n";
+    for (int i : eles) {
+        cout << "\tdequeued " << dq.dequeue() <<'\n';
+    }
+    cout << "now "; dq.display(); cout << '\n';
+}
+void test_clear() {
+    Deque<int> dq;
+    int eles[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    for (int i : eles) {
+        dq.enqueue(i);
+    }
+    dq.display();
+    cout << "==clearing now==\n";
+    dq.clear();
+    dq.ddisplay();
+}
 
 int main() {
-    test_enqueue_int();
+    //test_enqueue_int();
+    //test_dequeue_int();
+    test_clear();
     return 0;
 }

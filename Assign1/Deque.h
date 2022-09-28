@@ -20,44 +20,69 @@ class Deque
     ~Deque( )
       { delete [ ] objects; }
 
-    bool empty( ) const  { return size( ) == 0; }
-    int size( ) const { return theSize; }
-    void clear( ){
+    bool empty() const  { return size() == 0; }
+    int size() const { return theSize; }
+    void clear(){
         // remove all contents and reset the capacity to it's initial value 
-        // 
-        // Implement this...
+        // TODO: can I just destruct and re-refer `this` to a new one?
+        delete[] objects;
+        theSize = 0;
+        theCapacity = 8;
+        objects = new Object[ theCapacity ];
     }
 
     void reserve( int newCapacity )
     {
         // change the capacity to newCapacity 
         // (provided it is larger than the current size)
-        if (newCapacity <= theCapacity) return;
-
-        // first copy out to larger array
-        Object* newarr = new Object[ newCapacity ];
-        // then delete old
-        delete[] objects;
-        objects = newarr;
+        if (newCapacity > theCapacity)
+        {
+            // first copy out to larger array
+            Object* newarr = new Object[ newCapacity ];
+            int i;
+            for (int cur=0; cur < theSize; ++cur) {
+                i = (front + cur) % theCapacity;
+                // start everything at ind 0
+                newarr[cur] = objects[i];
+            }
+            front = 0;
+            back = theSize;
+            // then delete old
+            delete[] objects;
+            objects = newarr;
+            theCapacity = newCapacity;
+        }
     }
 
     // Operations 
 
     void enqueue( const Object & x )// Insert a new object at the back 
     {
-        cout << "Inserting " << x <<'\n';
-        cout << "\tcurrent back = " << objects[back] <<'\n';
+        //cout << "Inserting " << x <<'\n';
+        //cout << "\tcurrent back = " << objects[back] <<", @ ind "<< back <<'\n';
+
         if( theSize == theCapacity ) reserve( 2 * theCapacity + 1 );
         objects[ back ] = x ; 
-        cout << "\tnow back = " << objects[back] <<'\n';
+
+        //cout << "\tnow back = " << objects[back] <<'\n';
+
         back = (back+1) % theCapacity ;
-        cout << "New back ind = " << back <<'\n';
+
+        //cout << "New back ind = " << back <<'\n';
+
         theSize++ ;
     }
 
     void jump( const Object & x )// Insert a new object at the front 
     {
         // Implement this 
+        // push everything back
+        /*
+        if ((theSize - front) > theCapacity) {
+            // case wraparound
+        }
+        */
+        // dude, just calc every ind := __+1 % cap
     }
 
     Object dequeue( )// Remove and return the object at the front 
@@ -73,19 +98,17 @@ class Deque
         // Implement this 
     }
 
+    // TODO: base off theSize
     void display() const // print out the contents of the deque
     {
         cout << "size=" << theSize << std::endl;
         
-        cout << "front ind="<< front <<", "<< "back ind="<< back <<'\n';
+        //cout << "front ind="<< front <<", "<< "back ind="<< back <<'\n';
         cout << "< " ;
-        // first forward to arr end
-        for (int i = front; i < (theCapacity - front); ++i) {
-           cout << i << "=" << objects[i] << ", " ;
-        }
-        // then wrap around to back
-        for (int i= 0; i < back; ++i) {
-           cout << i << "=" << objects[i] << ", " ;
+        int i;
+        for (int cur=0; cur < theSize; ++cur) {
+            i = (front + cur) % theCapacity;
+            cout << cur << "=" << objects[i] << ", " ;
         }
         cout << " >" << endl;
     }
@@ -96,6 +119,14 @@ class Deque
     {
         // Implement this.  The output should be in the style used in 
         // Vector and Stack classes provided.
+        cout << "capacity= " << theCapacity << ", size=" << theSize << std::endl;
+        cout << "[ " ;
+        int i;
+        for (int cur=0; cur < theCapacity; ++cur) {
+            i = (front + cur) % theCapacity;
+            cout << cur << "=" << objects[i] << ", " ;
+        }
+        cout << " ]" << endl;
     }
 
 
