@@ -1,0 +1,43 @@
+Script started on 2020-10-18 17:36:59-0700
+make alldgm@csil-cpu6:~/sfuhome/225/2020-Fall/A2code/BST$ make all
+make: Nothing to be done for 'all'.
+dgm@csil-cpu6:~/sfuhome/225/2020-Fall/A2code/BST$ ./BSTtest2
+Start of BSTtest
+Keys:
+1
+2
+5
+8
+11
+12
+14
+15
+17
+18
+Tree:
+12
+    2
+        1
+        5
+            8
+                11
+    15
+        14
+        18
+            17
+Links:
+12) @:0x556f208e6280  L:0x556f208e62e0 R:0x556f208e62a0
+    2) @:0x556f208e62e0  L:0x556f208e63a0 R:0x556f208e6300
+        1) @:0x556f208e63a0  L:0 R:0
+        5) @:0x556f208e6300  L:0 R:0x556f208e6320
+            8) @:0x556f208e6320  L:0 R:0x556f208e6340
+                11) @:0x556f208e6340  L:0 R:0
+    15) @:0x556f208e62a0  L:0x556f208e6360 R:0x556f208e62c0
+        14) @:0x556f208e6360  L:0 R:0
+        18) @:0x556f208e62c0  L:0x556f208e6380 R:0
+            17) @:0x556f208e6380  L:0 R:0
+End of BSTtest
+dgm@csil-cpu6:~/sfuhome/225/2020-Fall/A2code/BST$ exit
+exit
+
+Script done on 2020-10-18 17:37:12-0700

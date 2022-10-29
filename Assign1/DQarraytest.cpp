@@ -7,11 +7,14 @@ template <typename Object>
 // if test passed, returns true; else, false
 bool test_case(Deque<Object>& dq, int ind, int expec) {
     try {
-        cout << "DQ["<< to_string(ind) <<"] = " << dq[ind] <<'\n';
+        cout << "DQ["<< to_string(ind) <<"] = " << dq[ind];
+        cout << ": passed" <<'\n';
         return (dq[ind] == expec);
     }
     catch (const char* err) { 
-        cout << err << '\n';
+        cout << err;
+        if (expec == -1)
+            cout << ": passed" <<'\n';
         return false;
     }
 }
@@ -25,19 +28,23 @@ bool test_case_mod(Deque<Object>& dq, int ind, int repl, int expec) {
         return (dq[ind] == expec);
     }
     catch (const char* err) { 
-        cout << err << '\n';
+        cout << err;
+        if (expec == -1)
+            cout << ": passed" <<'\n';
         return false;
     }
 }
 
 void test_arr_access() {
+    cout << "==== [] Access Test ====\n";
+
     Deque<int> dq;
     int eles[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     for (int i : eles) {
         dq.enqueue(i);
     }
     cout << "Deque DQ, "; dq.display();
-    cout <<'\n';
+    //cout <<'\n';
 
     int sample[] = {0, 3, 6, 9};
     for (int i : sample) {
@@ -48,13 +55,15 @@ void test_arr_access() {
 }
 
 void test_arr_access_mod() {
+    cout << "==== [] Access and Assignment Test ====\n";
+
     Deque<int> dq;
     int eles[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     for (int i : eles) {
         dq.enqueue(i);
     }
     cout << "Deque DQ, "; dq.display();
-    cout <<'\n';
+    //cout <<'\n';
 
     int sample[] = {0, 3, 6, 9};
     bool passed;
@@ -66,11 +75,13 @@ void test_arr_access_mod() {
             cout << ", test case failed";
         cout << "\nnow: "; dq.display();
     }
-    passed = test_case_mod(dq, 10, 8, 8);
-    passed = test_case_mod(dq, 0, -2, -2);
+    // -1 here serves as err code (i.e. expect error)
+    passed = !test_case_mod(dq, 10, 8, -1);
+    passed = !test_case_mod(dq, -3, -5, -1);
 }
 
 int main() {
     test_arr_access();
+    cout << '\n';
     test_arr_access_mod();
 }

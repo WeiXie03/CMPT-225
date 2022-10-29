@@ -1,0 +1,1 @@
+As well, potential interference between deque methods is tested in the final `full_test()` function in `Darraytest.cpp`. In `full_test()`, a deque is created, filled with values beyond the initial capacity by enqueuing and jumping, and modified via the `[]` operator. Then, a few values are dequeued and ejected, and finally the deque is cleared.

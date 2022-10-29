@@ -81,14 +81,14 @@ class Deque
         if( theSize == theCapacity ) reserve( 2 * theCapacity + 1 );
         // starting from back, "pull" each element one farther right/back
         int i;
-        for (int cur = theSize; cur >= 0; --cur) {
+        for (int cur = theSize-1; cur >= 0; --cur) {
             i = (front + cur) % theCapacity;
             // move back by 1
             objects[ (i+1) % theCapacity ] = objects[i];
         }
-        objects[front] = x;
         ++theSize;
         back = (front + theSize) % theCapacity;
+        objects[front] = x;
     }
 
     Object dequeue( )// Remove and return the object at the front 
@@ -106,6 +106,7 @@ class Deque
             return -1;
         };
         --theSize;
+        --back;
         return objects[back];
     }
 
