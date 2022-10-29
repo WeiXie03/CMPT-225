@@ -374,8 +374,8 @@ class BinarySearchTree
             out << t->element << ") ";
             // addr's
             out << "@:" << t;
-            out << "L:" << t->left;
-            out << "R:" << t->right;
+            out << " L:" << t->left;
+            out << " R:" << t->right;
             out << endl;
 
             displayLinks( t->left, depth+1, out );
